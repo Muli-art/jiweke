@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kids</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="Text/css" href="css/style.css">
+  <script src="java script/java.js"></script>
+  
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="banner"></div>
+
+  <!-- Horizontal Navigation -->
+  <nav class="nav-bar" id="navbar">
+    <a href="offer.html" class="nav-btn offer-btn"><i class="fas fa-tags"></i> OFFER 🔥</a>
+    <a href="mutton chicken.html" class="nav-btn">MUTTON/CHICKEN</a>
+    <a href="Fish.html" class="nav-btn">FISH</a>
+    <a href="platter.html" class="nav-btn">PLATTERS</a>
+    <a href="side orders.html" class="nav-btn">SIDE ORDERS</a>
+    <a href="snacks.html" class="nav-btn">SNACKS</a>
+    <a href="kids.html" class="nav-btn">KIDS</a>
+    <a href="pizza.html" class="nav-btn">PIZZA (NEW)</a>
+    <a href="hot beverages.html" class="nav-btn">HOT BEVERAGES</a>
+    <a href="chef special.html" class="nav-btn">CHEF'S SPECIAL</a>
+  </nav>
+
+  <script>
+    // Highlight active nav link
+    const currentURL = window.location.href.toLowerCase();
+    document.querySelectorAll('.nav-btn').forEach(link => {
+      const href = link.getAttribute('href').toLowerCase();
+      if (currentURL.includes(href)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+  <!-- Cart Section -->
+  <section class="cart-section" id="cart-section">
+    <div class="cart-icon" onclick="window.location.href='cart.html'">
+      <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Cart" />
+      <span class="cart-count" id="cart-count">0</span>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <div class="menu-container" id="menu-list"></div>
+
+  <script>
+    const menuItems = [
+       { id: 1, name: "1 Kg Goat", price: 1200, img: "goat1.jpg" },
+      { id: 2, name: "1/2KG Goat", price: 750, img: "goat 2.jpg" },
+      { id: 3, name: "Goat Meat", price: 700, img: "Nyama choma 2.jpg" },
+      { id: 4, name: "Full Goat", price: 13000, img: "Nyama choma 3.jpg" },
+      { id: 5, name: "Half Goat", price: 7000, img: "Nyama choma 4.jpg" },
+      { id: 6, name: "Kichwa & Matumbo", price: 500, img: "Nyama choma 1.jpg" },
+      { id: 7, name: "Full Chicken Kienyeji", price: 2000, img: "Full kienyeji.jpg" },
+      { id: 8, name: "1KG Pork", price: 1500, img: "pork 1.jpg" }
+    ];
+
+    const menuList = document.getElementById('menu-list');
+    const cartCount = document.getElementById('cart-count');
+    const cartSection = document.getElementById('cart-section');
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cartCount.textContent = cart.length;
+    }
+
+    function addToCart(item) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function renderMenu() {
+      menuList.innerHTML = '';
+      menuItems.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+          <div class="offer-badge">OFFER</div>
+          <img src="${item.img}" class="menu-image" alt="${item.name}" />
+          <div class="menu-content">
+            <div class="menu-title">${item.name}</div>
+            <div class="menu-price">KSH ${item.price.toFixed(2)}</div>
+            <button class="order-button" onclick='addToCart(${JSON.stringify(item)})'>Order</button>
+          </div>
+        `;
+        menuList.appendChild(div);
+      });
+    }
+
+    renderMenu();
+    updateCartCount();
+
+    // Floating behavior on scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        cartSection.classList.add('floating');
+      } else {
+        cartSection.classList.remove('floating');
+      }
+    });
+  </script>
+
+     
+
+   
+
+
+  
+
+
+
+
+<footer class="footer">
+  <div class="footer-wrapper">
+    <!-- Contact -->
+    <div class="footer-contact">
+      <p>📞 <a href="tel:+254728333985">+254 728 333 985</a></p>
+      <p>📧 <a href="mailto:jiweketavern@gmail.com">jiweketavern@gmail.com</a></p>
+      <p>💬 <a href="https://wa.me/254728333985" target="_blank">Chat on WhatsApp</a></p>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="footer-social">
+      <a href="https://www.facebook.com/JiwekeTavernNairobi" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/jiweketavern/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+      <a href="https://wa.me/254728333985" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <p class="footer-copy">© 2025 Jiweke Tavern. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #000000;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 40px;
+   border-top: 9px solid #ddd;
+  }
+
+  .footer-wrapper {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .footer-contact{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+    
+  }
+
+  .footer-contact p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  .footer-contact a {
+    color:#29e963;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+  }
+
+  .footer-contact a:hover {
+    color: #ffcc00;
+  }
+
+  .footer-social {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-social img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-social img:hover {
+    transform: scale(1.2);
+  }
+
+  .footer-copy {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #f0f0f0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-contact p {
+      font-size: 15px;
+    }
+    .footer-social img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: 20px 15px;
+    }
+
+  .footer-contact {
+      grid-template-columns: 2fr;
+  }
+    .footer-social {
+      gap: 25px;
+    }
+    .footer-social img {
+      width: 26px;
+      height: 26px;
+    }
+    .footer-copy {
+      font-size: 13px;
+    }
+  }
+</style>
+
+
+
+  
+  
+</body>
+</html>

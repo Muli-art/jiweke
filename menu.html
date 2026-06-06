@@ -1,0 +1,183 @@
+<!-- PIZZA MENU SECTION START -->
+<section class="menu-grid">
+  <div class="menu-item">
+    <img src="Garlic-Butter-Wings.jpg" alt="Garlic Butter Wings">
+    <div class="size-options">
+      <span class="size">Small</span>
+      <span class="size active">Large</span>
+    </div>
+    <h3>Garlic Butter Wings</h3>
+    <p>crispy chicken wings, garlic butter</p>
+    <div class="price">22K</div>
+  </div>
+
+  <div class="menu-item">
+    <img src="Lemon-Pepper-Wings.jpg" alt="Lemon Pepper Sauce Wings">
+    <div class="size-options">
+      <span class="size active">Small</span>
+      <span class="size">Large</span>
+    </div>
+    <h3>Lemon Pepper Sauce Wings</h3>
+    <p>crispy chicken wings, lemon pepper sauce</p>
+    <div class="price">22K</div>
+  </div>
+
+  <div class="menu-item">
+    <img src="sprit.png" alt="Onion Rings">
+    <div class="size-options">
+      <span class="size active">Small</span>
+      <span class="size">Large</span>
+    </div>
+    <h3>Onion Rings</h3>
+    <p>deep-fried onion, mayo</p>
+    <div class="price">15K</div>
+  </div>
+
+  <div class="menu-item">
+    <img src="French-Fries.jpg" alt="French Fries">
+    <div class="size-options">
+      <span class="size">Small</span>
+      <span class="size active">Large</span>
+    </div>
+    <h3>French Fries</h3>
+    <p>french-fried potatoes, mayo</p>
+    <div class="price">15K</div>
+  </div>
+
+  <div class="menu-item">
+    <img src="Spicy-Garlic-Tofu.jpg" alt="Spicy Garlic Tofu">
+    <div class="size-options">
+      <span class="size active">Small</span>
+      <span class="size">Large</span>
+    </div>
+    <h3>Spicy Garlic Tofu</h3>
+    <p>deep fried tofu, garlic, chilli, onion</p>
+    <div class="price">15K</div>
+  </div>
+
+  <div class="menu-item">
+    <img src="Calamari.jpg" alt="Calamari">
+    <div class="size-options">
+      <span class="size">Small</span>
+      <span class="size active">Large</span>
+    </div>
+    <h3>Calamari</h3>
+    <p>deep-fried squid, sour&cream sauce</p>
+    <div class="price">23.5K</div>
+  </div>
+</section>
+<!-- PIZZA MENU SECTION END -->
+
+<!-- CSS STYLES -->
+<style>
+  :root {
+    --main-bg: #fdfaf6;
+    --card-bg: #fff;
+    --highlight: #ff8243;
+    --text-dark: #2b2b2b;
+    --text-muted: #777;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    padding: 40px 20px;
+    background-color: var(--main-bg);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .menu-item {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease;
+    position: relative;
+  }
+
+  .menu-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .menu-item img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+
+  .size-options {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .size {
+    background-color: #e0e0e0;
+    color: #444;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .size.active {
+    background-color: var(--highlight);
+    color: white;
+    font-weight: 600;
+  }
+
+  .menu-item h3 {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+
+  .menu-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: auto;
+  }
+
+  .price {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--highlight);
+  }
+
+  @media (min-width: 1024px) {
+    .menu-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

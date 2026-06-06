@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jiweke Tavern Menu</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+     
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #ffbf00;
+      color: #222;
+    }
+
+
+    .banner {
+      width: 100%;
+      height: 280px;
+      background-image: url('LIVE LIFE.png'); /* Replace with your image path */
+      background-size: cover;
+      background-position: center;
+      animation: popUpScale 6s ease-in-out infinite;
+    }
+
+    @keyframes popUpScale {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* NAVIGATION STYLING */
+    .nav-bar {
+      display: flex;
+      overflow-x: auto;
+      background: #f7efef;
+      padding: 14px 10px;
+      border-top: 3px solid #000;
+      border-bottom: 3px solid #000000;
+      box-shadow: 0 4px 12px #000000;
+      gap: 12px;
+      scroll-snap-type: x mandatory;
+      transition: top 0.4s ease;
+    }
+
+    .nav-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .nav-bar::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    .nav-btn {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: 2px solid #ddd;
+      background: linear-gradient(145deg, #e2e2e2, #ffffff);
+      color: #000000;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 2px #000000;
+      position: relative;
+    }
+
+    .nav-btn:hover {
+      background: #f0cd06;
+      color: #000000;
+      border-color: #bbb;
+      transform: translateY(-2px);
+    }
+
+    /* ACTIVE NAV LINK INDICATOR */
+    .nav-btn.active {
+      background: #f0c60d;
+      color: #000000;
+      border-color: #222;
+      font-weight: 900;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    /* OFFER BUTTON SPECIAL EFFECT */
+    .offer-btn {
+      background: linear-gradient(45deg, #ff0000, #b30000);
+      color: #fff !important;
+      font-weight: 900;
+      border: 2px solid #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      animation: glowPulse 1.5s infinite;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 8px #ff0000; }
+      50% { box-shadow: 0 0 20px #ff0000; }
+      100% { box-shadow: 0 0 8px #ff0000; }
+    }
+
+    /* RESPONSIVENESS */
+    @media (max-width: 600px) {
+      .nav-bar {
+        padding: 12px 6px;
+      }
+
+      .nav-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+
+      .offer-btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+    }
+  
+
+  </style>
+
+</head>
+<body>
+  <div class="banner"></div>
+
+
+  <!-- Navigation Menu -->
+  <nav class="nav-bar" id="navbar">
+    <a href="index.html" class="nav-btn offer-btn"> <i class="fas fa-tags"></i> OFFER🔥 </a>
+    <a href="MUTTONCHIKEN.html" class="nav-btn">MUTTON/CHICKEN</a>
+    <a href="Fish.html" class="nav-btn">FISH</a>
+    <a href="PLATTERS.html" class="nav-btn">PLATTERS</a>
+    <a href="SIDE ORDERS.html" class="nav-btn">SIDE ORDERS</a>
+    <a href="SNACKS.html" class="nav-btn">SNACKS</a>
+    <a href="KIDS.html" class="nav-btn">KIDS</a>
+    <a href="PIZZA.html" class="nav-btn">PIZZA (NEW)</a>
+    <a href="HOT BEVERAGES.html" class="nav-btn">HOT BEVERAGES</a>
+    <a href="CHEF'S SPECIAL.html" class="nav-btn">CHEF'S SPECIAL</a>
+  </nav>
+
+  <script>
+    // Highlight active page
+    const currentURL = window.location.href.toLowerCase();
+    document.querySelectorAll('.nav-btn').forEach(link => {
+      const href = link.getAttribute('href').toLowerCase();
+      if (currentURL.includes(href)) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+  <style>
+    body, html { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #fafafa; color: #333; display:flex; justify-content:center; }
+    .checkout { width: 100%; max-width: 500px; margin:20px; background: #fff; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 20px; }
+    h1 { text-align:center; color: #DAA520; margin-bottom: 20px; }
+    .tab-switch { display: flex; border-bottom: 2px solid #DAA520; }
+    .tab-switch button { flex:1; background:none; border:none; padding:10px; font-size:1rem; cursor: pointer; }
+    .tab-switch button.active { border-bottom: 4px solid #DAA520; font-weight:bold; }
+    .form-section { display:none; margin-top:20px; }
+    .form-section.active { display:block; }
+    .field-group { margin-bottom:15px; }
+    input, select { width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; font-size:1rem; }
+    .item { display:flex; align-items:center; gap:15px; margin:15px 0; }
+    .item img { width:60px; height:60px; object-fit:cover; border-radius:6px; }
+    .total { display:flex; justify-content: space-between; margin:20px 0; font-size:1.2rem; font-weight:bold; border-top:2px solid #DAA520; padding-top:15px; }
+    .payment, .order-summary { margin-bottom:20px; }
+    .btn { width:100%; padding:12px; background:#0033A0; color:#fff; border:none; border-radius:6px; font-size:1rem; cursor: pointer; }
+    @media(max-width:600px) {
+      .item { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout">
+    <h1>Complete Your Order</h1>
+    <div class="tab-switch">
+      <button id="tab-home" class="active">Home Delivery</button>
+      <button id="tab-dine">Dine at JiWeke</button>
+    </div>
+    <div id="form-home" class="form-section active">
+      <div class="field-group"><label>Name</label><input type="text" id="name-home"/></div>
+      <div class="field-group"><label>Email</label><input type="email" id="email-home"/></div>
+      <div class="field-group"><label>Address</label><input type="text" id="address-home"/></div>
+    </div>
+    <div id="form-dine" class="form-section">
+      <div class="field-group"><label>Name</label><input type="text" id="name-dine"/></div>
+      <div class="field-group"><label>Email</label><input type="email" id="email-dine"/></div>
+      <div class="field-group"><label>Select Zone</label>
+        <select id="zone-dine">
+          <option value="">Choose Zone...</option>
+          <option>Lobby</option>
+          <option>Poolside</option>
+          <option>Garden Terrace</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="order-summary" id="items-container"></div>
+
+    <div class="payment"> 
+      <strong>Payment Method</strong><br/>
+      <label><input type="radio" name="payment" value="mpesa" checked> M-Pesa</label>&nbsp;
+      <label><input type="radio" name="payment" value="cod"> Cash on Delivery</label>
+    </div>
+
+    <div class="total"><span>Grand Total:</span><span id="order-total">KES 0.00</span></div>
+    <button class="btn" onclick="placeOrder()">Place Order</button>
+  </div>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const container = document.getElementById('items-container');
+  let total = 0;
+  cart.forEach(item => {
+    const subtotal = item.price * (item.quantity||1);
+    total += subtotal;
+    const div = document.createElement('div');
+    div.className='item';
+    div.innerHTML = `
+      <img src="${item.image||'https://via.placeholder.com/60'}" alt="${item.name}">
+      <div><strong>${item.name}</strong><br>KES ${item.price.toFixed(2)}</div>
+      <div>KES ${subtotal.toFixed(2)}</div>
+    `;
+    container.appendChild(div);
+  });
+  document.getElementById('order-total').textContent = `KES ${total.toFixed(2)}`;
+
+  document.getElementById('tab-home').addEventListener('click', () => {
+    document.getElementById('tab-home').classList.add('active');
+    document.getElementById('tab-dine').classList.remove('active');
+    document.getElementById('form-home').classList.add('active');
+    document.getElementById('form-dine').classList.remove('active');
+  });
+  document.getElementById('tab-dine').addEventListener('click', () => {
+    document.getElementById('tab-dine').classList.add('active');
+    document.getElementById('tab-home').classList.remove('active');
+    document.getElementById('form-dine').classList.add('active');
+    document.getElementById('form-home').classList.remove('active');
+  });
+
+  function placeOrder(){
+    const mode = document.getElementById('form-home').classList.contains('active') ? 'Home Delivery' : 'Dine at JiWeke';
+    const payment = document.querySelector('input[name="payment"]:checked').value;
+    let name, email, detail;
+    if(mode==='Home Delivery'){
+      name = document.getElementById('name-home').value.trim();
+      email = document.getElementById('email-home').value.trim();
+      const addr = document.getElementById('address-home').value.trim();
+      if(!name||!email||!addr){ return alert('Complete all fields'); }
+      detail = `Address: ${addr}`;
+    } else {
+      name = document.getElementById('name-dine').value.trim();
+      email = document.getElementById('email-dine').value.trim();
+      const zone = document.getElementById('zone-dine').value;
+      if(!name||!email||!zone){ return alert('Complete all fields'); }
+      detail = `Zone: ${zone}`;
+    }
+    let body=`Name: ${name}\nEmail: ${email}\nMode: ${mode}\n${detail}\nPayment: ${payment}\nItems:\n`;
+    cart.forEach(i=> body+=`– ${i.name} x${i.quantity||1}: KES ${(i.price*(i.quantity||1)).toFixed(2)}\n`);
+    body+=`Grand Total: KES ${total.toFixed(2)}`;
+    const mailTo = `mailto:you@jiweke.com?subject=${encodeURIComponent('New Order')}&body=${encodeURIComponent(body)}`;
+    const mailToUser = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent('Your JiWeke Order')}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailTo;
+    setTimeout(() => window.location.href = mailToUser, 500);
+    localStorage.removeItem('cart');
+  }
+</script>
+</body>
+</html>
+

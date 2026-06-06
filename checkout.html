@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dine at Jiweke - Checkout</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f8f9fb;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: #000;
+      color: #fff3f3;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Container */
+    .checkout-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .checkout-form, .checkout-summary {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* Headings */
+    .checkout-form h2, .checkout-summary h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #111;
+      border-left: 5px solid #c8102e;
+      padding-left: 10px;
+    }
+
+    /* Form Fields */
+    .checkout-form label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .checkout-form input, .checkout-form select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border 0.2s;
+    }
+    .checkout-form input:focus, .checkout-form select:focus {
+      border-color: #c8102e;
+      outline: none;
+    }
+
+    /* Order Items */
+    .checkout-summary .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+    .checkout-summary .item span:first-child {
+      font-weight: 500;
+    }
+
+    /* Total */
+    .checkout-summary .total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-top: 2px solid #c8102e;
+      margin-top: 15px;
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Button Styles */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .secondary-btn {
+      padding: 12px;
+      font-size: 1rem;
+      background: #f1f1f1;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .secondary-btn:hover {
+      background: #e4e4e4;
+      border-color: #999;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
+      background: #c8102e;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    .place-order-btn:hover {
+      background: #a00d24;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+      .btn-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Dine at Jiweke</h1>
+  </header>
+
+  <div class="checkout-container">
+    
+    <!-- Form Section -->
+    <div class="checkout-form">
+      <h2>Your Details</h2>
+      <form id="order-form" action="https://formspree.io/f/mblooqvl" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="zone">Zone</label>
+        <select id="zone" name="zone" required>
+          <option value="">Select your zone</option>
+          <option value="Nairobi CBD">Nairobi CBD</option>
+          <option value="Westlands">Westlands</option>
+          <option value="Kilimani">Kilimani</option>
+          <option value="Lang'ata">Lang'ata</option>
+          <option value="Karen">Karen</option>
+        </select>
+
+        <!-- Hidden input for cart data -->
+        <input type="hidden" id="cart-data" name="cart">
+
+        <!-- Navigation Buttons -->
+        <div class="btn-grid">
+          <button type="button" class="secondary-btn" onclick="window.location.href='cart.html'">← Back to Cart</button>
+          <button type="button" class="secondary-btn" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+        </div>
+
+        <!-- Place Order -->
+        <button type="submit" class="place-order-btn">Proceed & Place Order</button>
+      </form>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="checkout-summary">
+      <h2>Your Order</h2>
+      <div id="order-items"></div>
+      <div class="total">
+        <span>Total:</span> <span id="order-total">$0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const orderItemsEl = document.getElementById('order-items');
+    const orderTotalEl = document.getElementById('order-total');
+    const cartDataInput = document.getElementById('cart-data');
+
+    function loadOrderSummary() {
+      orderItemsEl.innerHTML = '';
+      let subtotal = 0;
+
+      if(cart.length === 0) {
+        orderItemsEl.innerHTML = "<p>Your cart is empty.</p>";
+        orderTotalEl.textContent = "$0.00";
+        return;
+      }
+
+      cart.forEach(item => {
+        const qty = item.quantity || 1;
+        const itemTotal = item.price * qty;
+        subtotal += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `<span>${item.name} (x${qty})</span><span>$${itemTotal.toFixed(2)}</span>`;
+        orderItemsEl.appendChild(div);
+      });
+
+      orderTotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      // Add cart data to hidden input
+      cartDataInput.value = JSON.stringify(cart);
+    }
+
+    loadOrderSummary();
+  </script>
+
+</body>
+</html>

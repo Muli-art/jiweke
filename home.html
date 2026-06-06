@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiweke Tavern Banner</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Banner */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(135deg, #0a2a43, #000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .banner h1, .banner h2, .banner h3 {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .welcome {
+      font-size: 3rem;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .to {
+      font-size: 2rem;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+      animation-delay: 1.2s;
+    }
+
+    .jiweke {
+      font-size: 3.5rem;
+      margin-top: 20px;
+      transform: translateY(100px);
+      opacity: 0;
+      animation: slideUp 1.5s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    .ji {
+      color: #d4af37; /* Gold */
+    }
+
+    .w {
+      color: #1e90ff; /* Blue */
+    }
+
+    /* Hover interactive effect */
+    .jiweke:hover {
+      transform: translateY(-5px) scale(1.05);
+      text-shadow: 0 0 20px rgba(212,175,55,0.6), 0 0 25px rgba(30,144,255,0.6);
+      transition: 0.4s ease;
+      cursor: pointer;
+    }
+
+    /* Keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* New Grid Section */
+    .grid-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 50px;
+      border: 2px solid #444;
+      margin: 40px auto;
+      max-width: 1100px;
+      align-items: center;
+    }
+
+    .grid-text {
+      animation: slideInLeft 1.5s ease forwards;
+    }
+
+    .grid-text h2 {
+      font-size: 2rem;
+      border-left: 5px solid #d4af37;
+      padding-left: 15px;
+      margin-bottom: 15px;
+    }
+
+    .grid-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    .grid-images {
+      display: grid;
+      gap: 15px;
+    }
+
+    .grid-images img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #555;
+      object-fit: cover;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .welcome { font-size: 2.2rem; }
+      .to { font-size: 1.5rem; }
+      .jiweke { font-size: 2.5rem; }
+
+      .grid-section {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <section class="banner">
+    <h1 class="welcome">Welcome</h1>
+    <h2 class="to">to</h2>
+    <h3 class="jiweke"><span class="ji">Ji</span><span class="w">III</span>eke</h3>
+  </section>
+
+  <!-- Grid Section -->
+  <section class="grid-section">
+    <div class="grid-text">
+      <h2>About Jiweke Tavern</h2>
+      <p>
+        At Jiweke Tavern, we blend culture, food, and community in a unique way. 
+        From delicious meals to a relaxing atmosphere, our space is designed 
+        for people who love good vibes and great company.
+      </p>
+    </div>
+    <div class="grid-images">
+      <img src="https://via.placeholder.com/500x300" alt="Tavern Image 1">
+      <img src="https://via.placeholder.com/500x300" alt="Tavern Image 2">
+    </div>
+  </section>
+
+</body>
+</html>

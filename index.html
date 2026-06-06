@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiweke Tavern — Nairobi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  /* NEW LIGHT THEME VARIABLES */
+  --bg-main: #ffffff;
+  --bg-alt: #f7f7f7;
+  --text-main: #1a1a1a;
+  --text-muted: #555555;
+  --gold: #c9a02c;
+  --gold2: #e8c84a;
+  --gold-dim: #e6d8b3;
+  --border: #eaeaea;
+  --white: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── GOLD DIVIDER ── */
+.gold-rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.gold-rule::before,
+.gold-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.gold-rule-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.4s ease, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom-color: var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+}
+.nav-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--gold);
+  padding: 9px 22px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-main);
+  transition: all 0.3s;
+}
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  padding: 28px 32px 36px;
+  z-index: 999;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.nav-mobile a:last-child { border-bottom: none; }
+.nav-mobile a:hover { color: var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-main);
+}
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  /* Light overlay to make the image visible but keep the text readable */
+  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.85) 60%, var(--bg-main) 100%);
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 2;
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 800px;
+}
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s ease forwards;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s ease forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 1s 0.7s ease forwards;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s ease forwards;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--gold);
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,160,44,0.2);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  background: transparent;
+  border: 1px solid var(--text-main);
+  padding: 14px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s 1.3s ease forwards;
+}
+.hero-scroll span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.scroll-line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+/* ── ABOUT ── */
+.about {
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: var(--bg-main);
+}
+.about-img-wrap {
+  position: relative;
+}
+.about-img-wrap::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  right: 18px;
+  bottom: 18px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-img-wrap img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+.about-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.about-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-main);
+  margin-bottom: 24px;
+}
+.about-title em { font-style: italic; color: var(--gold); }
+.about-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 36px;
+}
+.about-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+.about-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.about-stat-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* ── MENU SECTION ── */
+.menu-section {
+  padding: 100px 60px;
+  background: var(--bg-alt);
+  position: relative;
+  overflow: hidden;
+}
+.menu-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.menu-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-title-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+.section-title-big em { font-style: italic; color: var(--gold); }
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.menu-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 420px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.menu-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.menu-card:hover img {
+  transform: scale(1.07);
+}
+.menu-card-overlay {
+  position: absolute;
+  inset: 0;
+  /* Keeping a dark gradient here ensures the white text on the cards is always legible */
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px 32px;
+  transition: background 0.4s;
+}
+.menu-card:hover .menu-card-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.9) 100%);
+}
+.menu-card-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.menu-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.menu-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.menu-card:hover .menu-card-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-card-link i { font-size: 0.7rem; transition: transform 0.2s; }
+.menu-card-link:hover i { transform: translateX(4px); }
+
+/* ── EVENTS ── */
+.events-section {
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.events-text .section-tag { text-align: left; }
+.events-text .section-title-big { text-align: left; }
+.events-text .section-sub { text-align: left; margin: 0 0 36px; }
+.events-features {
+  list-style: none;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.events-features li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.events-features li::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.events-img-wrap {
+  position: relative;
+}
+.events-img-wrap::after {
+  content: 'EVENTS';
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.03);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.events-img-wrap img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+.events-banner-strip {
+  margin-top: 20px;
+  background: var(--gold);
+  padding: 14px 24px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-align: center;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--bg-alt);
+  padding: 100px 60px;
+  position: relative;
+}
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+.contact-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 36px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+.contact-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+.contact-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.4rem;
+  color: var(--gold);
+  background: var(--bg-alt);
+  transition: all 0.3s;
+}
+.contact-card:hover .contact-icon {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+.contact-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.contact-card-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 56px;
+}
+.social-link {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border);
+  background: var(--bg-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.social-link:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(201,160,44,0.2);
+}
+
+/* ── LOCATION ── */
+.location-section {
+  padding: 100px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--bg-main);
+}
+.location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 36px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--gold);
+  padding: 16px 36px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.location-link:hover {
+  background: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,160,44,0.2);
+}
+.location-detail {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 18px;
+  letter-spacing: 0.04em;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+.footer-copy {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  .about,
+  .events-section {
+    grid-template-columns: 1fr;
+    padding: 72px 24px;
+    gap: 48px;
+  }
+  .about-img-wrap::before { display: none; }
+  .about-img-wrap img { height: 320px; }
+  .events-img-wrap img { height: 280px; }
+  .events-img-wrap::after { display: none; }
+
+  .menu-section { padding: 72px 24px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-card { height: 300px; }
+
+  .contact-section { padding: 72px 24px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .location-section { padding: 72px 24px; }
+
+  footer { padding: 28px 24px; flex-direction: column; text-align: center; }
+
+  .hero-title { font-size: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <img src="images/jiweke.jpeg" alt="Jiweke Logo">
+    <span class="nav-logo-text">Jiweke Tavern</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="booking.html" class="nav-cta">Book a Table</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#menu" onclick="toggleMenu()">Menu</a>
+  <a href="#events" onclick="toggleMenu()">Events</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="booking.html" style="color:var(--gold);margin-top:8px;border-bottom:none;font-weight:600;" onclick="toggleMenu()">Book a Table →</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <img src="Its party time.jpg" alt="Jiweke Tavern" class="hero-img">
+  <div class="hero-image-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nairobi · Umoja · Since 2020</p>
+    <h1 class="hero-title">Where Nairobi<br><em>Comes Alive</em></h1>
+    <p class="hero-sub">Great food, refreshing drinks, live entertainment.<br>Your favourite tavern in the heart of Umoja.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">
+        <i class="fas fa-utensils"></i> Explore Menu
+      </a>
+      <a href="booking.html" class="btn-outline">
+        <i class="fas fa-calendar-alt"></i> Book an Event
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-img-wrap reveal">
+    <img src="images/jiweke.jpeg" alt="Jiweke Tavern">
+  </div>
+  <div class="reveal reveal-delay-2">
+    <p class="about-tag">Our Story</p>
+    <h2 class="about-title">More than a tavern,<br><em>a community</em></h2>
+    <p class="about-body">
+      Jiweke Tavern is Nairobi's beloved gathering place — where locals come together over great food, cold drinks, and the kind of atmosphere that makes every visit feel like home. Rooted in Umoja and fuelled by community spirit, we've been crafting memorable experiences that keep you coming back.
+    </p>
+    <div class="gold-rule"><div class="gold-rule-diamond"></div></div>
+    <div class="about-stats">
+      <div>
+        <div class="about-stat-num">5+</div>
+        <div class="about-stat-lbl">Years serving Nairobi</div>
+      </div>
+      <div>
+        <div class="about-stat-num">100s</div>
+        <div class="about-stat-lbl">Events hosted</div>
+      </div>
+      <div>
+        <div class="about-stat-num">★4.8</div>
+        <div class="about-stat-lbl">Community rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section class="menu-section" id="menu">
+  <div class="section-header reveal">
+    <p class="section-tag">What We Offer</p>
+    <h2 class="section-title-big">Food &amp; <em>Drinks</em></h2>
+    <p class="section-sub">From hearty meals to refreshing cold ones — everything crafted to satisfy.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal reveal-delay-1">
+      <img src="images/food.jpeg" alt="Delicious Food">
+      <div class="menu-card-overlay">
+        <p class="menu-card-tag">Kitchen</p>
+        <h3 class="menu-card-title">Delicious Food</h3>
+        <a href="offer.html" class="menu-card-link">View Full Menu <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-2">
+      <img src="images/drinks.jpeg" alt="Drinks">
+      <div class="menu-card-overlay">
+        <p class="menu-card-tag">Bar</p>
+        <h3 class="menu-card-title">Refreshing Drinks</h3>
+        <a href="drinks.html" class="menu-card-link">View Full Bar <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ── -->
+<section class="events-section" id="events">
+  <div class="events-text reveal">
+    <p class="section-tag">Host With Us</p>
+    <h2 class="section-title-big">Your event,<br><em>unforgettable</em></h2>
+    <p class="section-sub">From private parties to live shows — Jiweke Tavern has the space, the energy, and the team to make your event exceptional.</p>
+    <ul class="events-features">
+      <li>Vibrant indoor &amp; outdoor spaces</li>
+      <li>Live entertainment &amp; DJ setups</li>
+      <li>Dedicated event coordination</li>
+      <li>Custom food &amp; drinks packages</li>
+    </ul>
+    <a href="booking.html" class="btn-primary">
+      <i class="fas fa-calendar-check"></i> Book a Space
+    </a>
+  </div>
+  <div class="events-img-wrap reveal reveal-delay-2">
+    <img src="images/party banner.png" alt="Events at Jiweke">
+    <div class="events-banner-strip">
+      🎶 Now accepting bookings for private shows &amp; parties
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-header reveal">
+      <p class="section-tag">Get In Touch</p>
+      <h2 class="section-title-big">We'd love to<br><em>hear from you</em></h2>
+    </div>
+    <div class="contact-grid">
+      <a href="tel:+254728333985" class="contact-card reveal reveal-delay-1">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-card-title">Call Us</div>
+        <div class="contact-card-sub">+254 728 333 985</div>
+      </a>
+      <a href="mailto:jmuli1311@gmail.com" class="contact-card reveal reveal-delay-2">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div class="contact-card-title">Email Us</div>
+        <div class="contact-card-sub">jmuli1311@gmail.com</div>
+      </a>
+      <a href="https://wa.me/254728333985" target="_blank" class="contact-card reveal reveal-delay-3">
+        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+        <div class="contact-card-title">WhatsApp</div>
+        <div class="contact-card-sub">Chat with us directly</div>
+      </a>
+    </div>
+    <div class="social-row reveal">
+      <a href="https://www.facebook.com/JiwekeTavernNairobi" target="_blank" class="social-link">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/jiweketavern/" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOCATION ── -->
+<section class="location-section reveal">
+  <div class="gold-rule" style="margin-bottom:40px"><div class="gold-rule-diamond"></div></div>
+  <p class="section-tag">Find Us</p>
+  <h2 class="section-title-big">Where Is <em>Jiweke?</em></h2>
+  <p class="section-sub" style="margin:0 auto">We're in Umoja, Nairobi — easy to find, impossible to forget.</p>
+  <a href="https://www.google.com/maps/place/Jiweke+Tavern+Umoja/@-1.2792939,36.8937883,2124m/" target="_blank" class="location-link">
+    <i class="fas fa-map-marker-alt"></i> Open in Google Maps
+  </a>
+  <p class="location-detail">Jiweke Tavern, Umoja · Nairobi, Kenya</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Jiweke Tavern</div>
+  <div class="footer-copy">© 2026 Jiweke Tavern, Nairobi · All rights reserved</div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('nav-mobile').classList.toggle('open');
+}
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
